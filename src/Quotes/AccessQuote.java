@@ -16,7 +16,7 @@ public class AccessQuote {
 
         EDIT: Never mind. I called the text "textOfQuote" instead of just "text". That made all the difference. Making a note here so I don't do that for other JSON files.
          */
-        
+
         try {
             Gson gson = new Gson();
             String filepath = "/Users/amycohen/codefellows/401/lab-amy/08-manual-http-json-server/src/recentquotes.json";

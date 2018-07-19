@@ -29,7 +29,7 @@ class MyHTTPServerExample {
                 header = inFromClient.readLine();
             }
 
-            String message = "<h1>neato</h1>";
+            String message = "<h1>Life Quotes</h1>";
             outToClient.write("HTTP/1.1 200 OK\n");
             outToClient.write("Content-Length: " + message.length() + "\n");
             outToClient.write("\n");
