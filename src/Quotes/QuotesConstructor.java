@@ -10,10 +10,10 @@ public class QuotesConstructor {
     public String[] tags;
     public String author;
     public String likes;
-    public String textOfQuotes;
+    public String text;
 
 
     public String toString() {
-        return textOfQuotes + " -- " + this.author;
+        return text + " -- " + this.author;
     }
 }
