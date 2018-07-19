@@ -1,10 +1,10 @@
 import java.io.*;
 import java.net.*;
 
-class MyHttpServer {
+class MyHTTPServerExample {
     public static final int PORT = 6789;
 
-    public static void main(String argv[]) throws Exception {
+    public static void main(String arg[]) throws Exception {
         ServerSocket welcomeSocket = new ServerSocket(PORT);
         System.out.println("Listening on http://localhost:" + PORT);
 
