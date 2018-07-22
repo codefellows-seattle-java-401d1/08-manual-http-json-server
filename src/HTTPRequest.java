@@ -4,11 +4,20 @@ import java.io.IOException;
 public class HTTPRequest {
     public String path;
 
-    public void HTTPRequest() {
-
+    public HTTPRequest(BufferedReader inFromClient) {
+        processRequest(inFromClient);
     }
 
-    String request = line.readLine();
-    this.path = line.split(" ")[1];
+    public void processRequest(BufferedReader inFromClient) {
+        try {
+            String requestLine = inFromClient.readLine();
+            this.path = requestLine.split(" ")[1];
 
+            if (this.path.equals("/")) {
+                this.path = "/index.html";
+            }
+        } catch (IOException e) {
+            System.out.println("Error parsing HTTP request: " + this.path);
+        }
+    }
 }
