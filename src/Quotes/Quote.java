@@ -11,7 +11,11 @@ public class Quote {
     public String likes;
     public String text;
 
-//public class String toString(){
-//        return text + "  ";
-//        }
-        }
+//    public String toString(){
+//        return this.author;
+//    }
+
+    public String toString(){
+        return "\" " + this.text + "\nby " + this.author;
+    }
+}
