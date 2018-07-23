@@ -54,7 +54,7 @@ public class HTTPStaticFileReader {
 
         String content ="___";
 
-        if(symbol.equals("RANDOM_JASON_QUOTE")){
+        if(symbol.equals("RANDOM_JSON_QUOTE")){
             content = AccessQuote.generateQuote();
         } else if(symbol.equals("TIMESTAMP")){
             content = currentTimestamp();
