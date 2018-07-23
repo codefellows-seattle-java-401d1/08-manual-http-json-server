@@ -10,14 +10,15 @@ public class HTTPresponse {
         this.body = body;
     }
 
-    public void sendResponse (BufferedWriter toClient) {
+    public void sendResponse (BufferedWriter outToClient) {
         try {
-            toClient.write("Http/1.1 " + this.statusCode + " Ok\n");
-            toClient.write("Content-Length: " + this.body.length() + "\n");
-            toClient.write("\n");
-            toClient.write(body + "\n");
-            toClient.flush();
-            toClient.close();
+            outToClient.write("HTTP/1.1 200 OK\n");
+            outToClient.write("Content-Length: " + this.body.length() + "\n");
+            outToClient.write("\n");
+            outToClient.write(body + "\n");
+
+            outToClient.flush();
+            outToClient.close();
         } catch (IOException e) {
             System.out.println("Error " + this.body);
             e.printStackTrace();

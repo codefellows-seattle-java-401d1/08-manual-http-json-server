@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class HTTPStaticFileReader {
-    private final String PATH = "/Users/macbookpro-2/Desktop/401/08-manual-http-json-server/mywebsite";
+    private final String PATH = "/Users/macbookpro-2/Desktop/401/08-manual-http-json-server/mywebsite/";
     private String path;
 
     public HTTPStaticFileReader(HTTPRequest req) {
@@ -14,7 +14,6 @@ public class HTTPStaticFileReader {
 
     public String contentReader() throws IOException {
         String content= "";
-
         String filepath = PATH + this.path;
         File pathFile = new File(filepath);
         Scanner filescanner = new Scanner(pathFile);
@@ -48,7 +47,4 @@ public class HTTPStaticFileReader {
         return "\"I'd rather die on my feet, than live on my knees." +
                 "\n - Emiliano Zapata";
     }
-
-
-}
 }
