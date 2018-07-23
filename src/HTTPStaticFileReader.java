@@ -45,8 +45,8 @@ public class HTTPStaticFileReader {
     }
 
     public String randomJSONQuote(){
-        return "\"Our prime purpose in this life is to help others. And if you can't help them, at least don't hurt " +
-                "them.\n - 14th Dalai Lama";
+        return "\"I'd rather die on my feet, than live on my knees." +
+                "\n - Emiliano Zapata";
     }
 
 
