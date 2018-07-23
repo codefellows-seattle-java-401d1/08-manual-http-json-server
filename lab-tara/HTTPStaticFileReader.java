@@ -1,12 +1,12 @@
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Scanner;
 
 public class HTTPStaticFileReader {
     private static final String ROOT_PATH_PREFIX =
-            "C:\\Users\\tbeth\\iCloudDrive\\Desktop\\code-fellows\\java-401d1\\labs\\08-manual-http-json-server\\";
-
-
+            "C:\\Users\\tbeth\\iCloudDrive\\Desktop\\code-fellows\\java-401d1\\labs\\08-manual-http-json-server\\lab" +
+                    "-tara\\html\\";
     private String path;
 
     public HTTPStaticFileReader(HTTPRequest request) {
@@ -45,11 +45,22 @@ public class HTTPStaticFileReader {
         String symbol = cells[0];
         String last = cells[1];
 
-        String content = "";
+        String content = "_______________";
         if (symbol.equals("RANDOM_JSON_QUOTE")) {
-            return "\"I am not a crook.\" --Nixon";
+            content = randomJSONQuote();
+        } else if (symbol.equals("TIMESTAMP")) {
+            content = currentTimeStamp();
         }
 
         return first + content + last;
+    }
+
+    public String randomJSONQuote() {
+        return "\"I am not a crook.\" --Nixon";
+    }
+
+    public String currentTimeStamp() {
+        Date date = new Date();
+        return date.toString();
     }
 }
