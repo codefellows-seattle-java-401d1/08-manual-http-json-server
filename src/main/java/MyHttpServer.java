@@ -1,3 +1,5 @@
+package main.java;
+
 import java.io.*;
 import java.net.*;
 
@@ -19,24 +21,19 @@ class MyHttpServer {
             String requestLine = inFromClient.readLine();
             System.out.println("REQUEST: " + requestLine);
 
-            // get the next line to collect all the headers
             String header = inFromClient.readLine();
-            // read lines and assume they're headers until reaching an empty line.
             while (!header.equals("")) {
                 System.out.println("HEADER: " + header);
                 header = inFromClient.readLine();
             }
 
-            String message = "<h1>neato</h1>";
+            String message = "<h1>Hey</h1>";
             outToClient.write("HTTP/1.1 200 OK\n");
             outToClient.write("Content-Length: " + message.length() + "\n");
-            outToClient.write("\n");
             outToClient.write(message + "\n");
-
             outToClient.flush();
             outToClient.close();
-
-            System.out.println("closed request.");
+            System.out.println("request closed");
         }
     }
 }
