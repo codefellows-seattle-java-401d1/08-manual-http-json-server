@@ -15,17 +15,13 @@ class MyHttpServer {
             BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
             BufferedWriter outToClient = new BufferedWriter(new OutputStreamWriter(connectionSocket.getOutputStream()));
 
-            // peel off the first GET/POST PATH line
-            String requestLine = inFromClient.readLine();
-            System.out.println("REQUEST: " + requestLine);
+            HTTPRequest request = new  HTTPRequest(inFromClient);
+            HTTPStaticFileReader file = new HTTPStaticFileReader(request);
 
-            // get the next line to collect all the headers
-            String header = inFromClient.readLine();
-            // read lines and assume they're headers until reaching an empty line.
-            while (!header.equals("")) {
-                System.out.println("HEADER: " + header);
-                header = inFromClient.readLine();
-            }
+            int statusCode = 200;
+            String body = "";
+            HTTPResponse response = new HTTPResponse(statusCode, body);
+            response.send();
 
             String message = "<h1>neato</h1>";
             outToClient.write("HTTP/1.1 200 OK\n");
