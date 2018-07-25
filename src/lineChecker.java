@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+//import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 import com.google.gson.Gson;
@@ -13,7 +16,7 @@ public class lineChecker {
             jsonData = lineForCheck.split("[{][{]")[1].split("[}][}]")[0];
             if(jsonData.equals("RANDOM_JSON_QUOTE")) {
                 Quote jsonReturn = randomQuoteFinder();
-                String jsonAppend = "author: " + jsonReturn.Author + "  Likes: " +jsonReturn.Likes + "\n Quote: " + jsonReturn.Text;
+                String jsonAppend = "author: " + jsonReturn.author + "  Likes: " +jsonReturn.likes + "\n Quote: " + jsonReturn.text;
                 lineToAppend = lineForCheck.split("[{][{]")[0] + jsonReturn + lineForCheck.split("[}][}]")[1];
             }else{
                 lineToAppend = lineForCheck;
@@ -26,7 +29,18 @@ public class lineChecker {
 
     public static Quote randomQuoteFinder(){
         Gson gson = builder.create();
-        Scanner jsonScanner = new Scanner(Server.root+"recentquotes.json");
+        File input;
+        Scanner jsonScanner;
+        try{
+            input = new File("resources/recentquotes.json");
+            jsonScanner = new Scanner(input);
+        }
+        catch(FileNotFoundException e)
+        {
+            Quote errorReturn = new Quote("404 error","404","File not found.");
+            return errorReturn;
+        }
+
         int quotesLineNumber = 0;
         while(jsonScanner.hasNextLine()){
             jsonScanner.nextLine();
@@ -34,11 +48,21 @@ public class lineChecker {
         }
         Random rng = new Random();
         quotesLineNumber = rng.nextInt(quotesLineNumber-1);
-        jsonScanner = new Scanner(Server.root+"recentquotes.json");
-        for(int i = 0; i<quotesLineNumber;i++){
-            jsonScanner.nextLine();
+        try{
+            input = new File("resources/recentquotes.json");
+            jsonScanner = new Scanner(input);
         }
-        return gson.fromJson(jsonScanner.nextLine(),Quote.class);
+        catch(FileNotFoundException e)
+        {
+            Quote errorReturn = new Quote("404 error","404","File not found.");
+            return errorReturn;
+        }
+        jsonScanner.useDelimiter("\\Z");
+        String fileContents = jsonScanner.next();
+        Quote[] quoteArray=gson.fromJson(fileContents,Quote[].class);
+        return quoteArray[quotesLineNumber];
+//        Object returnVal = jsonList.get(quotesLineNumber-1);
+//        return gson.fromJson(returnVal.toString(),Quote.class);
     }
 
 }

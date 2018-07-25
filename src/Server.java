@@ -6,13 +6,13 @@ public class Server {
     static int PORT;
 
     public static void main(String[] args)throws Exception{
-        PORT = 02543;
-        if(args[0]!=null){
+        PORT = 9999;
+        if(args.length!=0){
             PORT = Integer.parseInt(args[0]);
         }
 
         ServerSocket welcomeSocket = new ServerSocket(PORT);
-        System.out.println("Listening on http://localhost:)" + PORT);
+        System.out.println("Listening on http://localhost:" + PORT);
 
         Boolean isUp = true;
         while(isUp == true){
@@ -34,10 +34,8 @@ public class Server {
             message += HTTPResponse.randomQuote();
             outToClient.write("HTTP/1.1 200 OK\n");
             outToClient.write("Content-Length: " + message.length() + "\n");
-            outToClient.write("\n");
             outToClient.write(message + "\n");
 
-            outToClient.flush();
             outToClient.close();
 
             System.out.println("closed request.");

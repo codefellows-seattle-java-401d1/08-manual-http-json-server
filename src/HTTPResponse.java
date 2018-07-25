@@ -8,7 +8,7 @@ public class HTTPResponse {
 
     public static String randomQuote(){
         Quote quoteToPrint = lineChecker.randomQuoteFinder();
-        return quoteToPrint.Text+"\nAuthor: "+quoteToPrint.Author+"\n"+quoteToPrint.Likes+" likes";
+        return quoteToPrint.text+"\nAuthor: "+quoteToPrint.author+quoteToPrint.likes;
     }
 
     private static String errorCodeText(int errorCode){

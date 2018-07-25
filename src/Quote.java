@@ -1,12 +1,13 @@
 public class Quote {
     // POJO
-    String Author;
-    int Likes;
-    String Text;
+    String author;
+    String likes;
+    String[] tags;
+    String text;
 
-    public Quote(String Author, int Likes, String Text){
-        this.Author = Author;
-        this.Likes = Likes;
-        this.Text = Text;
+    public Quote(String Author, String Likes, String Text){
+        this.author = Author;
+        this.likes = Likes;
+        this.text = Text;
     }
 }
