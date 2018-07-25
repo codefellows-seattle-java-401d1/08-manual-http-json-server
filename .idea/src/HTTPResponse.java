@@ -13,7 +13,7 @@ public class HTTPResponse {
 
     public void send(BufferedWriter outToClient) {
       try {
-          outToClient.write("HTTP/1.1 200 OK\n");
+          outToClient.write("HTTP/1.1 " + this.statusCode + " OK\n");
           outToClient.write("Content-Length: " + this.body.length() + "\n");
           outToClient.write("\n");
           outToClient.write(body + "\n");
@@ -25,12 +25,6 @@ public class HTTPResponse {
           System.out.println("Response Body");
           e.printStackTrace();
       }
-
     }
 }
 
-
-
-
-
-}
