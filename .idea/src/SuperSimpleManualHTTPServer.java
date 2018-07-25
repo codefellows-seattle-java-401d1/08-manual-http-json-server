@@ -21,17 +21,9 @@ class MyHttpServer {
             int statusCode = 200;
             String body = "";
             HTTPResponse response = new HTTPResponse(statusCode, body);
-            response.send();
+            response.send(outToClient);
 
             String message = "<h1>neato</h1>";
-            outToClient.write("HTTP/1.1 200 OK\n");
-            outToClient.write("Content-Length: " + message.length() + "\n");
-            outToClient.write("\n");
-            outToClient.write(message + "\n");
-
-            outToClient.flush();
-            outToClient.close();
-
             System.out.println("closed request.");
         }
     }

@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 public class HTTPResponse {
     public int statusCode;
     public String body;
@@ -7,7 +11,20 @@ public class HTTPResponse {
         this.body = body;
     }
 
-    public void send() {
+    public void send(BufferedWriter outToClient) {
+      try {
+          outToClient.write("HTTP/1.1 200 OK\n");
+          outToClient.write("Content-Length: " + this.body.length() + "\n");
+          outToClient.write("\n");
+          outToClient.write(body + "\n");
+
+          outToClient.flush();
+          outToClient.close();
+      } catch (IOException e) {
+          System.out.println("Error sending HTTP response! Body: " + this.body);
+          System.out.println("Response Body");
+          e.printStackTrace();
+      }
 
     }
 }
