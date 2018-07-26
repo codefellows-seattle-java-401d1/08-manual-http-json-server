@@ -12,10 +12,10 @@ class MyHTTPServer {
         while (isRunning) {
             System.out.println("waiting for request...");
             Socket connectionSocket = welcomeSocket.accept();
-            BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket              .getInputStream()));
-            BufferedWriter outToClient = new BufferedWriter(new OutputStreamWriter(connectionSocket              .getOutputStream()));
+            BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
+            BufferedWriter outToClient = new BufferedWriter(new OutputStreamWriter(connectionSocket.getOutputStream()));
 
-            HTTPRequest request = new  HTTPRequest(inFromClient);
+            HTTPRequest request = new HTTPRequest(inFromClient);
             HTTPStaticFileReader file = new HTTPStaticFileReader(request);
 
             try {
@@ -24,13 +24,12 @@ class MyHTTPServer {
                 HTTPResponse response = new HTTPResponse(statusCode, body);
                 response.send(outToClient);
             }   catch (FileNotFoundException e) {
-                HTTPResponse response = new HTTPResponse(404, "Could not find " +                      request.path);
+                HTTPResponse response = new HTTPResponse(404, "Could not find " + request.path);
                 response.send(outToClient);
             }   catch (IOException e) {
                 HTTPResponse response = new HTTPResponse(500, "Internal Server Error");
                 response.send(outToClient);
             }
-
 
             System.out.println("closed request.");
         }
