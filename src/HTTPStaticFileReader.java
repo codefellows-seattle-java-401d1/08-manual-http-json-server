@@ -5,7 +5,9 @@ import java.util.Scanner;
 
 public class HTTPStaticFileReader {
     private String path;
-    private static final String ROOT_PATH_PREFIX = "/Users/amycohen/Desktop/mywebsite/";
+
+    //had to hardcode the html file location because ClassLoader is not working on my machine currently.
+    private static final String ROOT_PATH_PREFIX = "/Users/amycohen/codefellows/401/lab-amy/08-manual-http-json-server/HTMLFiles/";
 
     public HTTPStaticFileReader(HTTPRequest request) {
 
@@ -22,19 +24,7 @@ public class HTTPStaticFileReader {
             String line = scanner.nextLine();
             result += processLine(line);
         }
-
-
-
-
-
-        // How do I load a file from resource folder?
-        // https://stackoverflow.com/questions/15749192/how-do-i-load-a-file-from-resource-folder
-//        String filepath = "static/" + this.path;
-//        ClassLoader classLoader = getClass().getClassLoader();
-//        String fullFilepath = classLoader.getResource(filepath).getFile();
-//        File file = new File(fullFilepath);
-
-            return result;
+        return result;
         }
 
     // accepts a line and either returns the plain line, or

@@ -18,6 +18,9 @@ public class HTTPRequest {
 
             this.path = requestLine.split(" ")[1];
 //
+            if(this.path.equals("/")){
+                this.path = "/index.html";
+            }
 //            // get the next line to collect all the headers
 //            String header = inFromClient.readLine();
 //            // read lines and assume they're headers until reaching an empty line.
@@ -35,8 +38,6 @@ public class HTTPRequest {
 //            this.path = requestLine.split(" ")[1];
 //            System.out.println("Request Line: " + requestLine);
 //
-//            if (this.path.equals("/")) {
-//                this.path = "/index.html";
         } catch (IOException e) {
             System.out.println("Error parsing HTTP request: " + this.path);
         }
