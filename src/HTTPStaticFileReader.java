@@ -5,30 +5,37 @@ import java.util.Scanner;
 
 public class HTTPStaticFileReader {
     private String path;
+    private static final String ROOT_PATH_PREFIX = "/Users/amycohen/Desktop/mywebsite/";
 
-    public HTTPStaticFileReader(String page) {
+    public HTTPStaticFileReader(HTTPRequest request) {
 
-        this.path = page;
+       this.path = request.path;
     }
 
     public String getContents() throws IOException {
         String result = "";
 
+        String filepath = ROOT_PATH_PREFIX + this.path;
+        File file = new File (filepath);
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNextLine()){
+            String line = scanner.nextLine();
+            result += processLine(line);
+        }
+
+
+
+
+
         // How do I load a file from resource folder?
         // https://stackoverflow.com/questions/15749192/how-do-i-load-a-file-from-resource-folder
-        String filepath = "static/" + this.path;
-        ClassLoader classLoader = getClass().getClassLoader();
-        String fullFilepath = classLoader.getResource(filepath).getFile();
-        File file = new File(fullFilepath);
+//        String filepath = "static/" + this.path;
+//        ClassLoader classLoader = getClass().getClassLoader();
+//        String fullFilepath = classLoader.getResource(filepath).getFile();
+//        File file = new File(fullFilepath);
 
-        try (Scanner scanner = new Scanner(file)) {
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                result += processLine(line);
-            }
             return result;
         }
-    }
 
     // accepts a line and either returns the plain line, or
     // detects the template syntax {{SYMBOL_MARKER}} and replaces that portion
@@ -39,8 +46,8 @@ public class HTTPStaticFileReader {
         }
 
         // "<p>{{RANDOM_JSON_QUOTE}}</p>"
-        // first "<p>"
-        // rest "RANDOM_JSON_QUOTE}}</p>"
+        // first= "<p>"
+        // rest= "RANDOM_JSON_QUOTE}}</p>"
         String[] cells = line.split("\\{\\{");
         String first = cells[0];
         String rest = cells[1];
