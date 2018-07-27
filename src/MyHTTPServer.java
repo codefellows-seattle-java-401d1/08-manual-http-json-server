@@ -17,26 +17,35 @@ class MyHTTPServerExample {
             BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
             BufferedWriter outToClient = new BufferedWriter(new OutputStreamWriter(connectionSocket.getOutputStream()));
 
-            // peel off the first GET/POST PATH line
-            String requestLine = inFromClient.readLine();
-            System.out.println("REQUEST: " + requestLine);
 
-            // get the next line to collect all the headers
-            String header = inFromClient.readLine();
-            // read lines and assume they're headers until reaching an empty line.
-            while (!header.equals("")) {
-                System.out.println("HEADER: " + header);
-                header = inFromClient.readLine();
-            }
+            HTTPRequest request = new HTTPRequest(inFromClient);
+            HTTPStaticFileReader file = new HTTPStaticFileReader(request);
+
+            int statusCode = 200;
+            String body = "";
+            HTTPResponse response = new HTTPResponse(statusCode, body);
+            response.send(outToClient);
+//            // peel off the first GET/POST PATH line
+//            String requestLine = inFromClient.readLine();
+//            System.out.println("REQUEST: " + requestLine);
+//
+//            // get the next line to collect all the headers
+//            String header = inFromClient.readLine();
+//            // read lines and assume they're headers until reaching an empty line.
+//            while (!header.equals("")) {
+//                System.out.println("HEADER: " + header);
+//                header = inFromClient.readLine();
+//            }
 
             String message = "<h1>Life Quotes</h1>";
-            outToClient.write("HTTP/1.1 200 OK\n");
-            outToClient.write("Content-Length: " + message.length() + "\n");
-            outToClient.write("\n");
-            outToClient.write(message + "\n");
 
-            outToClient.flush();
-            outToClient.close();
+//            outToClient.write("HTTP/1.1 200 OK\n");
+//            outToClient.write("Content-Length: " + message.length() + "\n");
+//            outToClient.write("\n");
+//            outToClient.write(message + "\n");
+//
+//            outToClient.flush();
+//            outToClient.close();
 
             System.out.println("closed request.");
         }

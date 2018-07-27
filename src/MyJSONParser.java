@@ -5,7 +5,7 @@ public class MyJSONParser {
 
 
 //DEMO CODE THAT HAS TO BE CHANGED
-    
+
 //    public static void main(String[] args) {
 //        Gson gson = new Gson();
 //
