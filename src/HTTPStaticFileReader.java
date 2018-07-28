@@ -1,5 +1,4 @@
 import Quotes.AccessQuote;
-import Quotes.QuotesConstructor;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,7 +48,7 @@ public class HTTPStaticFileReader {
         String symbol = cells[0];
         String last = cells[1];
 
-        String content = replaceSymbol(symbol);
+        Object content = replaceSymbol(symbol);
 
         return first + content + last;
     }
@@ -57,18 +56,19 @@ public class HTTPStaticFileReader {
     public String replaceSymbol(String symbol) {
         String content = "_____________";
         if (symbol.equals("RANDOM_JSON_QUOTE")) {
-            content = randomJSONQuote();
+            content = AccessQuote.quoteRandomizer();
         } else if (symbol.equals("TIMESTAMP")) {
-            content = currentTimestamp();
+            currentTimestamp();
         }
         return content;
     }
 
-    public String randomJSONQuote() {
-        
-        return "\"I am not a crook.\" --Nixon";
-    }
-
+//    public E randomJSONQuote() {
+////        return "\"I am not a crook.\" --Nixon";
+//        return AccessQuote.quoteRandomizer();
+//
+//    }
+//
     public String currentTimestamp() {
         Date date = new Date();
         return date.toString();

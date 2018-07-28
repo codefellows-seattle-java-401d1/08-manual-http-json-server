@@ -1,6 +1,6 @@
 package Quotes;
 
-public class QuotesConstructor {
+public class QuotesConstructor <E>{
     //{
     // "tags": ["attributed-no-source"],
     // "author": "Marilyn Monroe",
