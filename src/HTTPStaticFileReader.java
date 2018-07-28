@@ -9,7 +9,7 @@ public class HTTPStaticFileReader {
     private String path;
 
     //had to hardcode the html file location because ClassLoader is not working on my machine
-    private static final String ROOT_PATH_PREFIX = "/Users/amycohen/codefellows/401/lab-amy/08-manual-http-json-server/HTMLFiles/";
+    private static final String ROOT_PATH_PREFIX = "/Users/amycohen/codefellows/401/lab-amy/08-manual-http-json-server/src/HTMLFiles";
 
     public HTTPStaticFileReader(HTTPRequest request) {
 
