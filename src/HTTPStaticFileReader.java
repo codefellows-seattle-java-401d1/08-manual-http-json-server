@@ -1,3 +1,6 @@
+import Quotes.AccessQuote;
+import Quotes.QuotesConstructor;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
@@ -6,7 +9,7 @@ import java.util.Scanner;
 public class HTTPStaticFileReader {
     private String path;
 
-    //had to hardcode the html file location because ClassLoader is not working on my machine currently.
+    //had to hardcode the html file location because ClassLoader is not working on my machine
     private static final String ROOT_PATH_PREFIX = "/Users/amycohen/codefellows/401/lab-amy/08-manual-http-json-server/HTMLFiles/";
 
     public HTTPStaticFileReader(HTTPRequest request) {
@@ -62,6 +65,7 @@ public class HTTPStaticFileReader {
     }
 
     public String randomJSONQuote() {
+        
         return "\"I am not a crook.\" --Nixon";
     }
 
