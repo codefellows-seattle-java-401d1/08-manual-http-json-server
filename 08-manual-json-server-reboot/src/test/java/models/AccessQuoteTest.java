@@ -10,7 +10,7 @@ import java.io.FileReader;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AccessQuoteTest {
-    
+
     @Test
     void firstQuote() throws FileNotFoundException {
         QuotesConstructor quote = null;
