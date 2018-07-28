@@ -9,8 +9,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 public class AccessQuote {
-    public static void main(String[] args) {
 
+
+    public static String quoteRandomizer() {
+        QuotesConstructor quote = null;
         /*
         I followed through the video instructions so I could learn it a little better and I got a null for the body of the quote but it WILL print the author. So I copied and pasted Steve's version from the README and I STILL get a null for the body of the quote.
 
@@ -27,11 +29,13 @@ public class AccessQuote {
             System.out.println("Num quotes: " + quotes.length);
 
             int randomIndex = (int) Math.floor(quotes.length * Math.random());
-            QuotesConstructor quote = quotes[randomIndex];
+            quote = quotes[randomIndex];
             System.out.println(quote);
+            return String.valueOf(quote);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        return String.valueOf(quote);
     }
 }

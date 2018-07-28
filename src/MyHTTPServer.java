@@ -6,7 +6,7 @@ import java.net.*;
 class MyHTTPServerExample {
     public static final int PORT = 6789;
 
-    public static void main(String arg[]) throws Exception {
+    public static void main(String arg[]) throws IOException {
         ServerSocket welcomeSocket = new ServerSocket(PORT);
         System.out.println("Listening on http://localhost:" + PORT);
 
@@ -17,27 +17,21 @@ class MyHTTPServerExample {
             BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
             BufferedWriter outToClient = new BufferedWriter(new OutputStreamWriter(connectionSocket.getOutputStream()));
 
-            // peel off the first GET/POST PATH line
-            String requestLine = inFromClient.readLine();
-            System.out.println("REQUEST: " + requestLine);
+            HTTPRequest request = new HTTPRequest(inFromClient);
+            HTTPStaticFileReader file = new HTTPStaticFileReader(request);
 
-            // get the next line to collect all the headers
-            String header = inFromClient.readLine();
-            // read lines and assume they're headers until reaching an empty line.
-            while (!header.equals("")) {
-                System.out.println("HEADER: " + header);
-                header = inFromClient.readLine();
+            try {
+                int statusCode = 200;
+                String body = file.getContents();
+                HTTPResponse response = new HTTPResponse(statusCode, body);
+                response.send(outToClient);
+            } catch (FileNotFoundException e){
+                HTTPResponse response = new HTTPResponse(404, "Could not find " + request.path);
+                response.send(outToClient);
+        } catch (IOException e){
+                HTTPResponse response = new HTTPResponse(500, "Internal server error");
+                response.send(outToClient);
             }
-
-            String message = "<h1>Life Quotes</h1>";
-            outToClient.write("HTTP/1.1 200 OK\n");
-            outToClient.write("Content-Length: " + message.length() + "\n");
-            outToClient.write("\n");
-            outToClient.write(message + "\n");
-
-            outToClient.flush();
-            outToClient.close();
-
             System.out.println("closed request.");
         }
     }
