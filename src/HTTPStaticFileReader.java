@@ -63,6 +63,12 @@ public class HTTPStaticFileReader {
         return content;
     }
 
+//    public E randomJSONQuote() {
+////        return "\"I am not a crook.\" --Nixon";
+//        return AccessQuote.quoteRandomizer();
+//
+//    }
+//
     public String currentTimestamp() {
         Date date = new Date();
         return date.toString();

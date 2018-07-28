@@ -3,7 +3,7 @@
 import java.io.*;
 import java.net.*;
 
-public class MyHTTPServer {
+class MyHTTPServerExample {
     public static final int PORT = 6789;
 
     public static void main(String arg[]) throws IOException {
@@ -28,7 +28,7 @@ public class MyHTTPServer {
             } catch (FileNotFoundException e){
                 HTTPResponse response = new HTTPResponse(404, "Could not find " + request.path);
                 response.send(outToClient);
-            } catch (IOException e){
+        } catch (IOException e){
                 HTTPResponse response = new HTTPResponse(500, "Internal server error");
                 response.send(outToClient);
             }
@@ -36,4 +36,3 @@ public class MyHTTPServer {
         }
     }
 }
-
