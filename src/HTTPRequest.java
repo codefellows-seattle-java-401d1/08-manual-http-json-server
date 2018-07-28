@@ -14,30 +14,13 @@ public class HTTPRequest {
         try {
             // peel off the first GET/POST PATH line
             String requestLine = inFromClient.readLine();
-//            System.out.println("REQUEST: " + requestLine);
+            System.out.println("REQUEST: " + requestLine);
 
             this.path = requestLine.split(" ")[1];
-//
+
             if(this.path.equals("/")){
                 this.path = "/index.html";
             }
-//            // get the next line to collect all the headers
-//            String header = inFromClient.readLine();
-//            // read lines and assume they're headers until reaching an empty line.
-//            while (!header.equals("")) {
-//                System.out.println("HEADER: " + header);
-//                header = inFromClient.readLine();
-
-
-
-
-//            // peel off the first GET/POST PATH line
-//            // "GET /home.html HTTP/1.1"
-//            // ["GET", "/home.html", "HTTP/1.1"][1]
-//            String requestLine = inFromClient.readLine();
-//            this.path = requestLine.split(" ")[1];
-//            System.out.println("Request Line: " + requestLine);
-//
         } catch (IOException e) {
             System.out.println("Error parsing HTTP request: " + this.path);
         }

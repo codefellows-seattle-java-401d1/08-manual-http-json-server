@@ -13,9 +13,6 @@ public class HTTPResponse {
 
 
     public void send(BufferedWriter outToClient) {
-//    StringBuffer httpBody = new StringBuffer();
-//        httpBody.write("<h1>random quotes</h1>\n");
-//        httpBody.write("<p>refresh page to see another random quote!</p>\n");
         try {
             outToClient.write("HTTP/1.1 " + this.statusCode + " OK\n");
             outToClient.write("Content-Length: " + this.body.length() + "\n");
