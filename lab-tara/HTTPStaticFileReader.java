@@ -1,3 +1,6 @@
+import quotes.AccessQuote;
+import quotes.Quote;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
@@ -45,13 +48,15 @@ public class HTTPStaticFileReader {
         String symbol = cells[0];
         String last = cells[1];
 
-        String content = "_______________";
+        String content = "";
         if (symbol.equals("RANDOM_JSON_QUOTE")) {
-            content = randomJSONQuote();
+            content = String.valueOf(AccessQuote.renderQuote());
+//            content = randomJSONQuote();
         } else if (symbol.equals("TIMESTAMP")) {
             content = currentTimeStamp();
+        } else {
+            content = randomJSONQuote();
         }
-
         return first + content + last;
     }
 
