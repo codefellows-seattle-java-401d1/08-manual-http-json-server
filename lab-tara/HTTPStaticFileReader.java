@@ -8,8 +8,7 @@ import java.util.Scanner;
 
 public class HTTPStaticFileReader {
     private static final String ROOT_PATH_PREFIX =
-            "C:\\Users\\tbeth\\iCloudDrive\\Desktop\\code-fellows\\java-401d1\\labs\\08-manual-http-json-server\\lab" +
-                    "-tara\\html\\";
+            "/Users/tara/Desktop/code-fellows/java-401d1/labs/08-manual-http-json-server/lab-tara/html/";
     private String path;
 
     public HTTPStaticFileReader(HTTPRequest request) {
